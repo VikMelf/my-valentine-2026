@@ -1,4 +1,4 @@
-/* Скидаємо дефолтні відступи браузера */
+/* Скидаємо все зайве від браузера */
 * {
     margin: 0;
     padding: 0;
@@ -10,99 +10,96 @@ html, body {
     width: 100%;
 }
 
-/* Основні стилі body — повний рожевий фон + скрол дозволено */
+/* Повністю рожевий фон без країв, скрол дозволено */
 body {
-    background: linear-gradient(135deg, #ffe4e1, #ffb6c1, #ff69b4); /* гарний рожевий градієнт на всю сторінку */
-    min-height: 100vh;               /* мінімум на весь екран + скрол при потребі */
-    font-family: 'Caveat', cursive;  /* рукописний шрифт для всього */
-    color: #ff69b4;                  /* базовий колір тексту */
-    overflow-x: hidden;              /* без горизонтального скролу */
-    overflow-y: auto;                /* вертикальний скрол дозволено */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;         /* центрування по вертикалі */
+    background: #ffe4e1;             /* однотонний світло-рожевий — без "ліній" */
+    /* Якщо хочеш градієнт: background: linear-gradient(to bottom, #ffe4e1, #ffb6c1); */
+    min-height: 100vh;
+    font-family: 'Caveat', cursive;
+    color: #c71585;
+    overflow-x: hidden;
+    overflow-y: auto;                /* скрол працює завжди */
+    padding: 0;
+    margin: 0;
 }
 
-/* Контейнер з контентом */
+/* Контейнер — центрує, додає безпечні відступи зверху/знизу */
 .container {
     text-align: center;
-    padding: 30px 15px;
-    max-width: 90%;
-    width: 100%;
+    padding: 40px 15px 80px 15px;   /* великий нижній padding — кнопка не прилипає до краю */
+    max-width: 92%;
     margin: 0 auto;
-    flex: 1;                         /* розтягується, щоб кнопка не злипалася зверху */
 }
 
-/* Заголовок */
+/* Заголовок — великий відступ зверху, щоб не обрізався */
 h1 {
     font-family: 'Caveat', cursive;
     font-weight: 700;
-    font-size: 3em;                  /* базовий розмір, адаптується нижче */
-    color: #ff1493;                  /* яскраво-рожевий */
-    margin-bottom: 20px;
-    animation: pulse 2s infinite;
+    font-size: 2.8em;
+    color: #ff1493;
+    margin: 20px 0 25px 0;
+    animation: pulse 2.5s infinite;
+    line-height: 1.2;
 }
 
-/* Текст повідомлення */
+/* Повідомлення */
 .message {
-    font-family: 'Caveat', cursive;
-    font-size: 1.6em;
-    line-height: 1.6;
-    margin: 25px 15px;
-    color: #c71585;                  /* темно-рожевий */
+    font-size: 1.7em;
+    line-height: 1.5;
+    margin: 20px 10px 30px;
+    color: #c71585;
 }
 
-/* Фото */
+/* Фото — видно повністю, гарна рамка */
 .photo {
     max-width: 100%;
     height: auto;
-    border: 5px solid #ffb6c1;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-    animation: fadeIn 1.5s ease-in;
-    margin: 25px 0;
+    display: block;
+    margin: 25px auto;
+    border: 6px solid #ff69b4;
+    border-radius: 24px;
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.35);
+    animation: fadeIn 1.8s ease-in;
 }
 
-/* Кнопка "Далі" */
+/* Кнопка — велика, внизу, без "ліній" навколо */
 .button {
-    display: inline-block;
-    padding: 16px 45px;
+    display: block;                  /* блочний елемент — займає ширину */
+    width: 80%;
+    max-width: 280px;
+    margin: 40px auto 60px auto;     /* великий нижній відступ */
+    padding: 18px 0;
     background-color: #ff69b4;
     color: white;
     text-decoration: none;
-    border-radius: 50px;
-    font-family: 'Caveat', cursive;
-    font-size: 1.4em;
-    margin: 35px 0 50px 0;           /* великий нижній відступ — кнопка не прилипає до краю */
+    font-size: 1.5em;
+    border-radius: 60px;
+    box-shadow: 0 6px 18px rgba(255, 105, 180, 0.4);
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
 }
 
 .button:hover {
     background-color: #ff1493;
-    transform: scale(1.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.5);
 }
 
-/* Анімації (збережені без змін) */
+/* Анімації (збережено) */
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Падаючі сердечка (збережені) */
+/* Сердечка — фіксовані, не впливають на скрол */
 .hearts {
-    position: fixed;                 /* фіксовані, не впливають на скрол */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    inset: 0;
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
@@ -111,12 +108,14 @@ h1 {
 .hearts::before {
     content: '❤️ 💕 💖 💗 💓 💞 💘 💝';
     position: absolute;
-    top: -60px;
+    top: -80px;
+    left: 0;
     width: 100%;
-    height: 100%;
-    animation: fall 12s linear infinite;
-    font-size: 2.2em;
-    opacity: 0.7;
+    height: 120%;
+    animation: fall 14s linear infinite;
+    font-size: 2.4em;
+    opacity: 0.65;
+    white-space: nowrap;
 }
 
 @keyframes fall {
@@ -126,33 +125,37 @@ h1 {
 
 .heart {
     position: absolute;
-    font-size: 2.5em;
-    animation: fall 6s linear forwards;
+    font-size: 2.8em;
+    animation: fall 7s linear forwards;
 }
 
-/* Адаптивність для телефонів */
+/* Мобільна адаптація — все більшим і зручнішим */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2.4em;
+        font-size: 2.5em;
+        margin-top: 15px;
     }
     .message {
-        font-size: 1.45em;
-        margin: 20px 10px;
+        font-size: 1.55em;
+        margin: 20px 15px 35px;
+    }
+    .photo {
+        border-width: 5px;
+        border-radius: 20px;
     }
     .button {
-        padding: 18px 50px;
-        font-size: 1.5em;
         width: 85%;
-        margin: 40px 0 70px 0;       /* ще більше місця знизу на мобілках */
+        padding: 20px 0;
+        font-size: 1.6em;
+        margin: 45px auto 80px auto;  /* ще більше місця знизу */
     }
     .container {
-        padding: 20px 12px;
+        padding: 30px 12px 100px 12px;
     }
 }
 
-/* Дуже маленькі екрани */
 @media (max-width: 380px) {
-    h1 { font-size: 2em; }
-    .message { font-size: 1.3em; }
-    .button { font-size: 1.4em; padding: 16px 40px; }
+    h1 { font-size: 2.2em; }
+    .message { font-size: 1.4em; }
+    .button { font-size: 1.5em; }
 }
